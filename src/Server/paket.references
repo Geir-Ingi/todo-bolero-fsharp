@@ -1,0 +1,11 @@
+﻿FSharp.Core
+Microsoft.AspNetCore
+Microsoft.AspNetCore.Hosting
+Microsoft.AspNetCore.Mvc.ViewFeatures
+Microsoft.Extensions.DependencyInjection
+Microsoft.AspNetCore.Components.WebAssembly.Server
+Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+Bolero
+Bolero.Server
+Bolero.Templates
+Bolero.HotReload.Server

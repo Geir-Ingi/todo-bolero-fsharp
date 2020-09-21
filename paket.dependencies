@@ -1,0 +1,30 @@
+source https://api.nuget.org/v3/index.json
+source https://ci.appveyor.com/nuget/bolero
+storage: none
+framework: netcoreapp3.1, netstandard2.1
+
+nuget FSharp.Core
+nuget Bolero
+nuget Bolero.Build
+nuget Bolero.Server
+nuget Bolero.Templates
+nuget Bolero.HotReload
+nuget Bolero.HotReload.Server
+nuget Microsoft.AspNetCore
+nuget Microsoft.AspNetCore.Components
+nuget Microsoft.AspNetCore.Components.Web
+nuget Microsoft.AspNetCore.Components.WebAssembly.Build
+nuget Microsoft.AspNetCore.Components.WebAssembly.DevServer
+nuget Microsoft.AspNetCore.Components.WebAssembly.Server
+nuget Microsoft.AspNetCore.Hosting
+nuget Microsoft.AspNetCore.Mvc.ViewFeatures
+nuget Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+nuget Microsoft.Extensions.DependencyInjection
+nuget Newtonsoft.Json
+nuget FSharpx.Extras
+nuget FsCheck.Xunit
+nuget FsUnit.xUnit
+nuget Microsoft.NET.Test.Sdk
+nuget xunit
+nuget xunit.runner.visualstudio
+nuget coverlet.collector

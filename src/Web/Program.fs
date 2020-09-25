@@ -19,7 +19,7 @@ module Program =
           Completed
     
     let initialModel =
-        { TodoList = { Tasks = [] }
+        { TodoList = createNewTodoList
           Show = ShowMode.All
           NewTask = ""
           Editing = None }

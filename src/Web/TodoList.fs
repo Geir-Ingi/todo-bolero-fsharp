@@ -43,30 +43,28 @@ type ViewTemplate = Template<"wwwroot/main.html">
 let update (_: TaskService) (msg: Message) (model: Model) =
     let update f = { model with TodoList = f }
     match msg with
-    | AddTask description -> // TODO: Implement
-        model
-    | RemoveTask id -> // TODO: Implement
-        model
-    | GotTasks ts -> // TODO: Implement
-        model
-    | ClearCompleted -> // TODO: Implement
-        model
-    | SetAllCompleted c -> // TODO: Implement
-        model
-    | SetCompleted (id, isCompleted) -> // TODO: Implement
-        model
-    | EditNewTask description -> // TODO: Implement
-        model
-    | SetShowMode s -> // TODO: Implement
-        model
-    | StartEdit id -> // TODO: Implement
-        model
-    | Edit description -> // TODO: Implement
-        model
-    | CommitEdit id -> // TODO: Implement
-        model
-    | CancelEdit -> // TODO: Implement
-        model
+    | AddTask description -> { (createNewTask model.TodoList description |> update) with
+                                NewTask = "" }
+    | RemoveTask id -> removeTask model.TodoList id |> update
+    | GotTasks ts -> (ts |> Array.fold createNewTask model.TodoList) |> update
+    | ClearCompleted -> clearCompleted model.TodoList |> update
+    | SetAllCompleted c -> setAllTasksCompleteness model.TodoList c |> update
+    | SetCompleted (id, isCompleted) -> setTaskCompleteness model.TodoList isCompleted id |> update
+    | EditNewTask description -> { model with NewTask = description }
+    | SetShowMode s -> { model with Show = s }
+    | StartEdit id -> { model with Editing =
+                                    model.TodoList.Tasks
+                                    |> List.tryFind (fun t -> t.Id = id) }
+    | Edit description -> { model with Editing =
+                                        model.Editing
+                                        |> Option.map (fun t -> { t with Description = description }) }
+    | CommitEdit id -> model.Editing
+                       |> Option.map (fun t ->
+                            { model with
+                                Editing = None
+                                TodoList = editTask model.TodoList id t.Description })
+                       |> Option.defaultValue { model with Editing = None }
+    | CancelEdit -> { model with Editing = None }
     | Error e -> failwith e.Message
     , Cmd.none
 
